@@ -5,13 +5,13 @@ var defaultTrust = .4;
 var transferredValueMultiplier = 2.6;
 var transferredValueSplit = .2;
 
-var initializeIndividuals = function() {
+var initializeIndividuals = function(honestyCoeff) {
     var individuals = [];
     for (var i = 0; i < populationSize; ++i) {
         individual = {
             value: 10.0,
             relations : Array.apply(null, Array(populationSize)).map(Number.prototype.valueOf, defaultTrust),
-            honesty: 0.99
+            honesty: honestyCoeff
         };
         individuals.push(individual);
     }
@@ -31,14 +31,14 @@ var computeRelation = function(sourceIndex, targetIndex, individuals) {
                 newTrustValue :  trustValue * (1 + 0.1) / ((1 + trustValue * 0.1)) //S-curve
                };
     } else {
-        return {sourceValueIncrease : sourceIndividual.value * (1-transferredValueSplit),
+        return {sourceValueIncrease : -sourceIndividual.value * (1-transferredValueSplit),
                 targetValueIncrease : transferredValue,
                 newTrustValue : 0.1 }; //trust discontinued
     }
 } 
 
-var runSimulation = function() {
-    var individuals = initializeIndividuals();
+var runSimulation = function(honestyCoeff) {
+    var individuals = initializeIndividuals(honestyCoeff);
     for (var i = 0; i < nbIterations; ++i) {
         var relationSourceIndex = Math.floor(Math.random()*populationSize);
         var relationTargetIndex = Math.floor(Math.random()*populationSize);
@@ -53,11 +53,3 @@ var runSimulation = function() {
     }
     return individuals;
 }
-
-var result = runSimulation();
-console.log(result);
-//var totalValue = result.reduce((prev, curr) => prev + curr.value) ;
-var totalValue = result.reduce(function(previousValue, currentValue, currentIndex, array) {
-    return previousValue + currentValue.value;
-}, 0);
-console.log(totalValue);
