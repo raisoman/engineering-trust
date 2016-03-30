@@ -1,6 +1,6 @@
   
 var populationSize = 10;
-var nbIterations = 100;
+var nbIterations = 200;
 var defaultTrust = .4;
 var transferredValueMultiplier = 2.6;
 var transferredValueSplit = .2;
@@ -33,7 +33,7 @@ var computeRelation = function(sourceIndex, targetIndex, individuals) {
     } else {
         return {sourceValueIncrease : -sourceIndividual.value * (1-transferredValueSplit),
                 targetValueIncrease : transferredValue,
-                newTrustValue : 0.1 }; //trust discontinued
+                newTrustValue : trustValue * ((1 + trustValue * 0.1)) / (1 + 0.1) };
     }
 } 
 
