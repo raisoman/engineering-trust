@@ -26,7 +26,7 @@ var computeRelation = function(sourceIndex, targetIndex, individuals) {
     var transferredValue = sourceIndividual.relations[targetIndex] * sourceIndividual.value * transferredValueMultiplier;
     var honestyTest = targetIndividual.honesty >= Math.random();
     if (honestyTest) {
-        return {sourceValueIncrease : transferredValue * transferredValueSplit,
+        return {sourceValueIncrease : transferredValue * transferredValueSplit - sourceIndividual.value * (1-transferredValueSplit),
                 targetValueIncrease : transferredValue * (1 - transferredValueSplit),
                 newTrustValue :  trustValue * (1 + 0.1) / ((1 + trustValue * 0.1)) //S-curve
                };
