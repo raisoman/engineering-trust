@@ -1,3 +1,5 @@
+"use strict";
+
 var circularGraph = function(targetDiv, parameters) {
 
     var diameter = parameters.diameter;

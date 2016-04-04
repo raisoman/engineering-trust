@@ -1,10 +1,11 @@
+"use strict";
 
 var dataset = [];
 
 var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset);
 var trustVsHonestyGraph = new liveGraph("#trustVsHonestyGraph", dataset);
 var circularGraphs = [];
-for (i = 0; i < 4; ++i) {
+for (var i = 0; i < 4; ++i) {
     var divName = "circularGraph" + i;
     var div = d3.select("body").append("div");
     div.attr("id", divName)

@@ -1,3 +1,5 @@
+"use strict";
+
 function liveGraph(targetDiv, data) {
 
     var canvasHeight = 500;
