@@ -1,6 +1,6 @@
-var circularGraph = function(targetDiv) {
+var circularGraph = function(targetDiv, parameters) {
 
-    var diameter = 500;
+    var diameter = parameters.diameter;
     var radius = diameter / 2;
     var margin = 20;
 
@@ -11,7 +11,7 @@ var circularGraph = function(targetDiv) {
         var r = parseFloat(circle.attr("r"));
         var text = circle.attr("id");
 
-        var tooltip = d3.select("#plot")
+        var tooltip = d3.select(targetDiv).select("#plot")
             .append("text")
             .text(text)
             .attr("x", x)
@@ -36,7 +36,7 @@ var circularGraph = function(targetDiv) {
     }
 
     // Initialization:
-    this.svg  = d3.select("body").select(targetDiv)
+    this.svg = d3.select("body").select(targetDiv)
             .append("svg")
             .attr("width", diameter)
             .attr("height", diameter);
@@ -95,7 +95,7 @@ var circularGraph = function(targetDiv) {
         // used to assign nodes color by group
         var color = d3.scale.category20();
 
-        d3.select("#plot").selectAll(".node")
+        d3.select(targetDiv).select("#plot").selectAll(".node")
             .data(nodes)
             .enter()
             .append("circle")
@@ -111,10 +111,10 @@ var circularGraph = function(targetDiv) {
 
     // Draws straight edges between nodes
     this.drawLinks = function(links) {
-        d3.select("#plot").selectAll(".link")
+        d3.select(targetDiv).select("#plot").selectAll(".link")
             .attr("stroke-width", function(d) {return d.value*50-15; })
 
-        d3.select("#plot").selectAll(".link")
+        d3.select(targetDiv).select("#plot").selectAll(".link")
             .data(links)
             .enter()
             .append("line")
@@ -133,7 +133,7 @@ var circularGraph = function(targetDiv) {
         var curve = d3.svg.diagonal()
             .projection(function(d) { return [d.x, d.y]; });
 
-        d3.select("#plot").selectAll(".link")
+        d3.select(targetDiv).select("#plot").selectAll(".link")
             .data(links)
             .enter()
             .append("path")
