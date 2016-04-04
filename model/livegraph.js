@@ -47,7 +47,9 @@ function liveGraph(targetDiv, data) {
 
         xScale.domain([0, d3.max(data, function(d) {
             return d[xVar]; })]);
-        yScale.domain([0, d3.max(data, function(d) {
+        yScale.domain([d3.min(data, function(d) {
+            return d[yVar]; }),
+                      d3.max(data, function(d) {
             return d[yVar]; })]);
 
         this.svg.select(".x.axis")
