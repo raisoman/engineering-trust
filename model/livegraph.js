@@ -1,18 +1,22 @@
 function liveGraph(targetDiv, data) {
 
+    var canvasHeight = 500;
+    var canvasWidth = 500;
+    var padding = 30;
+
     this.svg = d3.select(targetDiv).append("svg")
                 .attr("width", canvasWidth)
                 .attr("height", canvasHeight);
 
     var xScale = d3.scale.linear()
                     .domain([0, d3.max(data, function(d) {
-                        return 500/*d.totalValue*/;
+                        return 500;
                     })])
                     .range([padding, canvasWidth - padding * 2]);
 
     var yScale = d3.scale.linear()
                     .domain([0, d3.max(data, function(d) {
-                        return 100/* d.honestyCoeff*/;
+                        return 100;
                     })])
                     .range([canvasHeight - padding, padding]);
 
@@ -39,12 +43,12 @@ function liveGraph(targetDiv, data) {
     /*
      * Member function to update the graph when new data ticks in
      */
-    this.update = function(data) {
+    this.update = function(data, xVar, yVar) {
 
         xScale.domain([0, d3.max(data, function(d) {
-            return d.honestyCoeff; })]);
+            return d[xVar]; })]);
         yScale.domain([0, d3.max(data, function(d) {
-            return d.totalValue; })]);
+            return d[yVar]; })]);
 
         this.svg.select(".x.axis")
             .call(xAxis);
@@ -52,15 +56,15 @@ function liveGraph(targetDiv, data) {
         this.svg.select(".y.axis")
             .call(yAxis);
 
-        var circle = this.svg.selectAll("circle").data(data, function key(d) {return d.honestyCoeff;});
+        var circle = this.svg.selectAll("circle").data(data, function key(d) {return d[xVar];});
 
         circle.enter()
             .append("circle")
             .attr("cx", function(d) {
-                return xScale(d.honestyCoeff);
+                return xScale(d[xVar]);
             })
             .attr("cy", function(d) {
-                return yScale(d.totalValue);
+                return yScale(d[yVar]);
             })
         .transition()
         .duration(1000)
