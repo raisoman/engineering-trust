@@ -1,11 +1,10 @@
-  
-var populationSize = 10;
 var nbIterations = 200;
 var defaultTrust = .4;
 var transferredValueMultiplier = 2.6;
 var transferredValueSplit = .2;
 
-var individual = function(honestyCoeff) {
+var individual = function(id, honestyCoeff) {
+    this.id = id;
     this.value = 10.0;
     this.relations = Array.apply(null, Array(populationSize)).map(Number.prototype.valueOf, defaultTrust);
     this.honesty = honestyCoeff;
@@ -16,10 +15,10 @@ var individual = function(honestyCoeff) {
     }
 }
 
-var initializeIndividuals = function(honestyCoeff) {
+var initializeIndividuals = function(honestyCoeff, populationSize) {
     var individuals = [];
     for (var i = 0; i < populationSize; ++i) {
-        individuals.push(new individual(honestyCoeff));
+        individuals.push(new individual(i, honestyCoeff));
     }
     return individuals;
 }
@@ -43,8 +42,8 @@ var computeRelation = function(sourceIndex, targetIndex, individuals) {
     }
 } 
 
-var runSimulation = function(honestyCoeff) {
-    var individuals = initializeIndividuals(honestyCoeff);
+var runSimulation = function(honestyCoeff, populationSize) {
+    var individuals = initializeIndividuals(honestyCoeff, populationSize);
     var individualsArchive = [individuals];
     for (var i = 0; i < nbIterations; ++i) {
         var relationSourceIndex = Math.floor(Math.random()*populationSize);

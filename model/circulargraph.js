@@ -97,9 +97,13 @@ var circularGraph = function(targetDiv, parameters) {
         // used to assign nodes color by group
         var color = d3.scale.category20();
 
-        d3.select(targetDiv).select("#plot").selectAll(".node")
-            .data(nodes)
-            .enter()
+        var circles = d3.select(targetDiv).select("#plot").selectAll(".node")
+            .data(nodes);
+
+        circles.attr("cx", function(d, i) { return d.x; })
+            .attr("cy", function(d, i) { return d.y; });
+
+        circles.enter()
             .append("circle")
             .attr("class", "node")
             .attr("id", function(d, i) { return d.name; })
@@ -109,16 +113,24 @@ var circularGraph = function(targetDiv, parameters) {
             .style("fill",   function(d, i) { return color(d.group); })
             .on("mouseover", function(d, i) { addTooltip(d3.select(this)); })
             .on("mouseout",  function(d, i) { d3.select("#tooltip").remove(); });
+
+         circles.exit().remove();
+
     }
 
     // Draws straight edges between nodes
     this.drawLinks = function(links) {
-        d3.select(targetDiv).select("#plot").selectAll(".link")
-            .attr("stroke-width", function(d) {return d.value*50-15; })
+        var lines = d3.select(targetDiv).select("#plot").selectAll(".link").data(links, function(d) {
+            return d.source.id* 1e6 + d.target.id;
+        });
 
-        d3.select(targetDiv).select("#plot").selectAll(".link")
-            .data(links)
-            .enter()
+        lines.attr("stroke-width", function(d) {return d.value*50-15; })
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        lines.enter()
             .append("line")
             .attr("class", "link")
             .attr("stroke-width", function(d) {return d.value*50-15; })
@@ -127,6 +139,7 @@ var circularGraph = function(targetDiv, parameters) {
             .attr("x2", function(d) { return d.target.x; })
             .attr("y2", function(d) { return d.target.y; });
 
+        lines.exit().remove();
     }
 
     // Draws curved edges between nodes

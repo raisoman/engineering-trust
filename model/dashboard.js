@@ -13,9 +13,16 @@ for (var i = 0; i < 4; ++i) {
     circularGraphs[i] = new circularGraph("#" + divName, {diameter: 200});
 }
 
+var populationSize = 10;
+// when the input range changes update the population size
+d3.select("#populationSize").on("input", function() {
+  populationSize = +this.value;
+  d3.select("#populationSize-value").text(populationSize);
+});
+
 var interval = setInterval(function() {
     var honestyCoeff = Math.random();
-    var fullResult = runSimulation(honestyCoeff);
+    var fullResult = runSimulation(honestyCoeff, populationSize);
     var result = fullResult[fullResult.length -1];
     var totalValue = result.reduce(function(previousValue, currentValue, currentIndex, array) {
                                         return previousValue + currentValue.value;

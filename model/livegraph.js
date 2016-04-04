@@ -62,6 +62,13 @@ function liveGraph(targetDiv, data) {
 
         var circle = this.svg.selectAll("circle").data(data, function key(d) {return d[xVar];});
 
+        circle.attr("cx", function(d) {
+                return xScale(d[xVar]);
+            })
+            .attr("cy", function(d) {
+                return yScale(d[yVar]);
+            })
+
         circle.enter()
             .append("circle")
             .attr("cx", function(d) {
