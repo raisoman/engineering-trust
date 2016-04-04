@@ -9,7 +9,8 @@ for (i = 0; i < 2; ++i) {
     for (j = 0; j < 2; j++) {
         var divName = "circularGraph" + i + "_" + j;
         var div = d3.select("body").append("div");
-        div.attr("id", divName);
+        div.attr("id", divName)
+           .attr("class", "smallgraph");
         circularGraphs[i][j] = new circularGraph("#" + divName, {diameter: 200});
     }
 }

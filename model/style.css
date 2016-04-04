@@ -7,6 +7,16 @@ b {
     font-weight: 900;
 }
 
+.mediumgraph {
+    width: 50%;
+    float:left;
+}
+
+.smallgraph {
+    width: 25%;
+    float:left;
+}
+
 .outline {
     fill: none;
     stroke: #888888;
