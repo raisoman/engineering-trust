@@ -35,7 +35,6 @@ function liveGraph(targetDiv, data, parameters) {
                     .domain([0, 500])
                     .range([canvasHeight - padding, padding]);
     } else if (plotType === 'linear') {
-
         yScale = d3.scale.linear()
                     .domain([0, 500])
                     .range([canvasHeight - padding, padding]);
@@ -74,12 +73,17 @@ function liveGraph(targetDiv, data, parameters) {
             return d[yVar]; }),
                       d3.max(data, function(d) {
             return d[yVar]; })]);
-
         this.svg.select(".x.axis")
             .call(xAxis);
 
         this.svg.select(".y.axis")
             .call(yAxis);
+
+        //Don't show tick labels if there are too many of them
+        if(yScale.ticks().length > 150) {
+            this.svg.select(".y.axis")
+                    .call(yAxis).selectAll("text").remove();
+        };
 
         var circle = this.svg.selectAll("circle").data(data, function key(d) {return d[xVar];});
 

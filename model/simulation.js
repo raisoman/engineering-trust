@@ -1,4 +1,3 @@
-var nbIterations = 200;
 var defaultTrust = .4;
 var transferredValueMultiplier = 2.6;
 var transferredValueSplit = .2;
@@ -42,7 +41,7 @@ var computeRelation = function(sourceIndex, targetIndex, individuals) {
     }
 } 
 
-var runSimulation = function(honestyCoeff, populationSize) {
+var runSimulation = function(honestyCoeff, populationSize, nbIterations) {
     var individuals = initializeIndividuals(honestyCoeff, populationSize);
     var individualsArchive = [individuals];
     for (var i = 0; i < nbIterations; ++i) {

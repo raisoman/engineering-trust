@@ -23,7 +23,7 @@ d3.select("#populationSize").on("input", function() {
 });
 
 var simulationSpeed = 10;
-var interval;// = setInterval(executeSimulation, 1000/simulationSpeed);
+var interval;
 d3.select("#simulationSpeed").on("input", function() {
   simulationSpeed = +this.value;
   d3.select("#simulationSpeed-value").text(simulationSpeed);
@@ -31,9 +31,15 @@ d3.select("#simulationSpeed").on("input", function() {
   interval = setInterval(executeSimulation, 1000/simulationSpeed);
 });
 
+var nbIterations = 200;
+d3.select("#nbIterations").on("input", function() {
+  nbIterations = +this.value;
+  d3.select("#nbIterations-value").text(nbIterations);
+});
+
 var executeSimulation = function() {
     var honestyCoeff = Math.random();
-    var fullResult = runSimulation(honestyCoeff, populationSize);
+    var fullResult = runSimulation(honestyCoeff, populationSize, nbIterations);
     var result = fullResult[fullResult.length -1];
     var totalValue = result.reduce(function(previousValue, currentValue, currentIndex, array) {
                                         return previousValue + currentValue.value;
