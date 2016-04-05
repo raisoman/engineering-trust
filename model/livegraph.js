@@ -25,7 +25,7 @@ function liveGraph(targetDiv, data) {
     var xAxis = d3.svg.axis()
                     .scale(xScale)
                     .orient("bottom")
-                    .ticks(5);
+                    .tickValues(d3.range(0, 100, 25));;
 
     var yAxis = d3.svg.axis()
                     .scale(yScale)
