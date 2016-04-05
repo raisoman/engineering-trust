@@ -4,7 +4,7 @@ function liveGraph(targetDiv, data) {
 
     var canvasHeight = 500;
     var canvasWidth = 500;
-    var padding = 30;
+    var padding = 40;
 
     this.svg = d3.select(targetDiv).append("svg")
                 .attr("width", canvasWidth)
@@ -81,15 +81,14 @@ function liveGraph(targetDiv, data) {
         .duration(1000)
         .each("start", function() {
             d3.select(this)
-                .attr("fill", "red")
+                .attr("class", "datadotsmall")
                 .attr("r", 2);
         })
         .each("end", function() {
             d3.select(this)
                 .transition()
                 .duration(500)
-                .attr("fill", "red")
-                .attr("opacity", 0.2)
+                .attr("class", "datadotlarge")
                 .attr("r", 5);
         });
 

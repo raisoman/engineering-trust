@@ -5,11 +5,16 @@
 
 <body>
 <p>
-  <label for="populationSize"
-         style="display: inline-block; width: 240px; text-align: right">
-         Population Size : <span id="populationSize-value">10</span>
-  </label>
-  <input type="range" min="1" max="20" id="populationSize">
+    <label for="populationSize"
+            style="display: inline-block; width: 240px; text-align: right">
+            Population Size : <span id="populationSize-value">10</span>
+    </label>
+    <input type="range" min="1" max="20" id="populationSize">
+
+    <select onchange="changeCSS(this.value + '.css', 0)">
+        <option value="original">Original</option>
+        <option value="dark">Dark</option>
+    </select>
 </p>
 
 <div id="valueVsHonestyGraph" class="mediumgraph"></div>

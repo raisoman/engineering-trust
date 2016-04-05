@@ -54,3 +54,10 @@ var interval = setInterval(function() {
     circularGraphs[Math.floor(honestyCoeff * 4)].update(circularGraphData);
 
 }, 100);
+
+
+
+function changeCSS(cssFile, cssLinkIndex) {
+    var oldlink = document.getElementsByTagName("link").item(cssLinkIndex);
+    oldlink.href = cssFile;
+}

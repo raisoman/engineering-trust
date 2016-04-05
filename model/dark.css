@@ -1,6 +1,8 @@
 body {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
+    background-color: black;
+    color: #FFF;
 }
 
 b {
@@ -39,7 +41,7 @@ b {
 
 .link {
     fill: none;
-    stroke: #888888;
+    stroke: #FF0000;
     stroke-weight: 1px;
     stroke-opacity: 0.5;
 }
@@ -48,4 +50,24 @@ b {
     stroke: red;
     stroke-weight: 4px;
     stroke-opacity: 1.0;
+}
+
+.datadotsmall {
+    fill: red;
+}
+
+.datadotlarge {
+    fill: white;
+    opacity: 0.6;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #FFF;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+    fill: #FFF;
 }
