@@ -1,11 +1,17 @@
 "use strict";
 
-function liveGraph(targetDiv, data) {
+function liveGraph(targetDiv, data, parameters) {
 
     var canvasHeight = 500;
     var canvasWidth = 500;
-    var padding = 40;
+    var padding = 50;
+    var plotType = 'linear';
 
+    if (parameters) {
+        if (parameters.plotType) {
+            plotType = parameters.plotType;
+        }
+    }
     this.svg = d3.select(targetDiv).append("svg")
                 .attr("width", canvasWidth)
                 .attr("height", canvasHeight);
@@ -14,9 +20,19 @@ function liveGraph(targetDiv, data) {
                     .domain([0, 100])
                     .range([padding, canvasWidth - padding * 2]);
 
-    var yScale = d3.scale.linear()
+    var yScale;
+    if (plotType === 'semilog') {
+        yScale = d3.scale.log()
                     .domain([0, 500])
                     .range([canvasHeight - padding, padding]);
+    } else if (plotType === 'linear') {
+
+        yScale = d3.scale.linear()
+                    .domain([0, 500])
+                    .range([canvasHeight - padding, padding]);
+    } else {
+        throw "Unknown scale type " + plotType;
+    }
 
     var xAxis = d3.svg.axis()
                     .scale(xScale)

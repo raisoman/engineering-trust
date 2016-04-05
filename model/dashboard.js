@@ -1,7 +1,7 @@
 "use strict";
 
 var dataset = [];
-var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset);
+var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset, {plotType : "semilog"});
 var trustVsHonestyGraph = new liveGraph("#trustVsHonestyGraph", dataset);
 var circularGraphs = [];
 for (var i = 0; i < 4; ++i) {
@@ -30,7 +30,7 @@ var interval = setInterval(function() {
                                         return previousValue + currentValue.sumRelations();
                                    }, 0);
     var d = { honestyCoeff : honestyCoeff * 100,
-              totalValue: Math.log10(totalValue) * 50,
+              totalValue: totalValue,
               totalTrust : totalTrust
             };
     dataset.push(d);
