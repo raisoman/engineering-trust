@@ -2,15 +2,17 @@
 
 var circularGraph = function(targetDiv, parameters) {
 
-    var diameter = 100;
+    var diameter = 100; //default diameter
     var caption = null;
     if (parameters) {
         if (parameters.diameter) {
             diameter = parameters.diameter;
         }
+        caption = parameters.caption;
+
     }
     var radius = diameter / 2;
-    var margin = 20;
+    var margin = 30;
 
     // Generates a tooltip for a SVG circle element based on its ID
     this.addTooltip = function(circle) {
@@ -48,6 +50,13 @@ var circularGraph = function(targetDiv, parameters) {
             .append("svg")
             .attr("width", diameter)
             .attr("height", diameter);
+
+    this.svg.append("text")
+        .attr("x", (diameter / 2))
+        .attr("y", 20)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .text(caption);
 
     // create plot area within svg image
     this.plot = this.svg.append("g")

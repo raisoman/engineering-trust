@@ -4,12 +4,16 @@ var dataset = [];
 var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset, {plotType : "semilog", caption : "Total Value vs. Honesty"});
 var trustVsHonestyGraph = new liveGraph("#trustVsHonestyGraph", dataset,  {caption : "Total Trust vs. Honesty"});
 var circularGraphs = [];
-for (var i = 0; i < 4; ++i) {
+var nbBuckets = 4;
+for (var i = 0; i < nbBuckets; ++i) {
     var divName = "circularGraph" + i;
     var div = d3.select("body").append("div");
     div.attr("id", divName)
        .attr("class", "smallgraph");
-    circularGraphs[i] = new circularGraph("#" + divName, {diameter: 200});
+    circularGraphs[i] = new circularGraph("#" + divName, {
+        diameter: 250,
+        caption : "Population Honesty: " + 100*i/nbBuckets + "-" + 100*(i+1)/nbBuckets + "%"
+    });
 }
 
 var populationSize = 10;
@@ -50,7 +54,7 @@ var interval = setInterval(function() {
     }, []);
     var circularGraphData = { nodes : result,
                              links : relationList };
-    circularGraphs[Math.floor(honestyCoeff * 4)].update(circularGraphData);
+    circularGraphs[Math.floor(honestyCoeff * nbBuckets)].update(circularGraphData);
 
 }, 100);
 
