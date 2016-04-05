@@ -11,15 +11,11 @@ function liveGraph(targetDiv, data) {
                 .attr("height", canvasHeight);
 
     var xScale = d3.scale.linear()
-                    .domain([0, d3.max(data, function(d) {
-                        return 500;
-                    })])
+                    .domain([0, 100])
                     .range([padding, canvasWidth - padding * 2]);
 
     var yScale = d3.scale.linear()
-                    .domain([0, d3.max(data, function(d) {
-                        return 100;
-                    })])
+                    .domain([0, 500])
                     .range([canvasHeight - padding, padding]);
 
     var xAxis = d3.svg.axis()

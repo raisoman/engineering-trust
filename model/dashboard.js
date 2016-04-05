@@ -1,7 +1,6 @@
 "use strict";
 
 var dataset = [];
-
 var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset);
 var trustVsHonestyGraph = new liveGraph("#trustVsHonestyGraph", dataset);
 var circularGraphs = [];
@@ -54,7 +53,6 @@ var interval = setInterval(function() {
     circularGraphs[Math.floor(honestyCoeff * 4)].update(circularGraphData);
 
 }, 100);
-
 
 
 function changeCSS(cssFile, cssLinkIndex) {
