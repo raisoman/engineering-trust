@@ -5,11 +5,15 @@
 
 <body>
 <p>
-    <label for="populationSize"
-            style="display: inline-block; width: 240px; text-align: right">
+    <label for="populationSize">
             Population Size : <span id="populationSize-value">10</span>
     </label>
     <input type="range" min="1" max="20" id="populationSize">
+
+    <label for="simulationSpeed">
+            Simulation Speed : <span id="simulationSpeed-value">10</span>
+    </label>
+    <input type="range" min="1" max="100" id="simulationSpeed" value="10">
 
     <select onchange="changeCSS(this.value + '.css', 0)">
         <option value="original">Original</option>
@@ -21,6 +25,7 @@
 <div id="trustVsHonestyGraph" class="mediumgraph"></div>
 <div id="circulargraph"></div>
 </body>
+
 <script language="javascript" type="text/javascript" src="simulation.js"></script>
 <script language="javascript" type="text/javascript" src="livegraph.js"></script>
 <script language="javascript" type="text/javascript" src="circulargraph.js"></script>

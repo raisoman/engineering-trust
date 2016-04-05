@@ -9,7 +9,6 @@ var circularGraph = function(targetDiv, parameters) {
             diameter = parameters.diameter;
         }
         caption = parameters.caption;
-
     }
     var radius = diameter / 2;
     var margin = 30;

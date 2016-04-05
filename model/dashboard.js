@@ -17,13 +17,21 @@ for (var i = 0; i < nbBuckets; ++i) {
 }
 
 var populationSize = 10;
-// when the input range changes update the population size
 d3.select("#populationSize").on("input", function() {
   populationSize = +this.value;
   d3.select("#populationSize-value").text(populationSize);
 });
 
-var interval = setInterval(function() {
+var simulationSpeed = 10;
+var interval;// = setInterval(executeSimulation, 1000/simulationSpeed);
+d3.select("#simulationSpeed").on("input", function() {
+  simulationSpeed = +this.value;
+  d3.select("#simulationSpeed-value").text(simulationSpeed);
+  clearInterval(interval);
+  interval = setInterval(executeSimulation, 1000/simulationSpeed);
+});
+
+var executeSimulation = function() {
     var honestyCoeff = Math.random();
     var fullResult = runSimulation(honestyCoeff, populationSize);
     var result = fullResult[fullResult.length -1];
@@ -55,9 +63,9 @@ var interval = setInterval(function() {
     var circularGraphData = { nodes : result,
                              links : relationList };
     circularGraphs[Math.floor(honestyCoeff * nbBuckets)].update(circularGraphData);
+}
 
-}, 100);
-
+interval = setInterval(executeSimulation, 1000/simulationSpeed);
 
 function changeCSS(cssFile, cssLinkIndex) {
     var oldlink = document.getElementsByTagName("link").item(cssLinkIndex);
