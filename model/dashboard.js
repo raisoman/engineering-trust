@@ -1,8 +1,8 @@
 "use strict";
 
 var dataset = [];
-var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset, {plotType : "semilog"});
-var trustVsHonestyGraph = new liveGraph("#trustVsHonestyGraph", dataset);
+var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset, {plotType : "semilog", caption : "Total Value vs. Honesty"});
+var trustVsHonestyGraph = new liveGraph("#trustVsHonestyGraph", dataset,  {caption : "Total Trust vs. Honesty"});
 var circularGraphs = [];
 for (var i = 0; i < 4; ++i) {
     var divName = "circularGraph" + i;

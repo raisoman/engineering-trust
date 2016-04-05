@@ -68,6 +68,6 @@ b {
   shape-rendering: crispEdges;
 }
 
-.axis text {
+svg text {
     fill: #FFF;
 }

@@ -6,15 +6,24 @@ function liveGraph(targetDiv, data, parameters) {
     var canvasWidth = 500;
     var padding = 50;
     var plotType = 'linear';
+    var caption = null;
 
     if (parameters) {
         if (parameters.plotType) {
             plotType = parameters.plotType;
         }
+        caption = parameters.caption;
     }
     this.svg = d3.select(targetDiv).append("svg")
                 .attr("width", canvasWidth)
                 .attr("height", canvasHeight);
+
+    this.svg.append("text")
+        .attr("x", (canvasWidth / 2))
+        .attr("y", 20)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .text(caption);
 
     var xScale = d3.scale.linear()
                     .domain([0, 100])
