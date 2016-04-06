@@ -1,8 +1,8 @@
 "use strict";
 
 var dataset = [];
-var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset, {plotType : "semilog", caption : "Total Value vs. Honesty"});
-var trustVsHonestyGraph = new liveGraph("#trustVsHonestyGraph", dataset,  {caption : "Total Trust vs. Honesty"});
+var valueVsHonestyGraph = new liveGraph("#valueVsHonestyGraph", dataset, {plotType : "semilog", caption : "Total Value vs. Population Honesty"});
+var trustVsHonestyGraph = new liveGraph("#trustVsHonestyGraph", dataset,  {caption : "Total Trust vs. Population Honesty"});
 var circularGraphs = [];
 var nbBuckets = 4;
 for (var i = 0; i < nbBuckets; ++i) {
